@@ -1,0 +1,194 @@
+---
+import fighters from "@/data/fights.json";
+fighters.sort(() => 0.5 - Math.random());
+---
+
+<div class="mx-auto max-w-6xl p-8 px-2 pt-4 text-white md:pt-8 lg:px-10">
+  <div class="">
+    <div
+      class="mx-auto flex max-w-[600px] flex-row items-center justify-between"
+    >
+      <div class="relative">
+        <div
+          class="aspect-w-1 aspect-h-1 w-full overflow-hidden sm:h-70 sm:w-60"
+        >
+          <img
+            src="./images/character-default.webp"
+            alt="Peleador esquina izquierda"
+            id="fighter-img-0"
+            draggable="false"
+            class="animate-rotate-y animate-once animate-duration-[600ms] h-full w-full rounded-lg object-cover [mask-image:linear-gradient(#000_50%,transparent_100%)]"
+          />
+        </div>
+        <div
+          id="fighter-info-0"
+          class="absolute top-[90%] left-1/2 hidden w-max -translate-x-1/2 transform bg-black/80 px-3 font-semibold text-yellow-600 uppercase italic sm:top-[80%] sm:right-[80%] sm:left-0"
+        >
+        </div>
+      </div>
+      <div class="flex items-center justify-center">
+        <span
+          class="animate-fade-up animate-once animate-duration-500 animate-ease-in animate-delay-200 md:px-auto px-2 text-4xl font-bold italic md:text-6xl"
+          >VS</span
+        >
+      </div>
+      <div class="relative">
+        <div
+          class="aspect-w-1 aspect-h-1 w-full overflow-hidden sm:h-70 sm:w-60"
+        >
+          <img
+            src="./images/character-default.webp"
+            alt="Peleador esquina derecha"
+            id="fighter-img-1"
+            draggable="false"
+            class="animate-rotate-y animate-once animate-duration-[600ms] h-full w-full rounded-lg object-cover [mask-image:linear-gradient(#000_50%,transparent_100%)]"
+          />
+        </div>
+        <div
+          id="fighter-info-1"
+          class="absolute top-[90%] left-1/2 hidden w-max -translate-x-1/2 transform bg-black/80 px-3 font-semibold text-yellow-600 uppercase italic sm:top-[80%] sm:left-[80%]"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="mt-5 mb-2 text-center font-semibold text-white uppercase">
+    Luchadores
+  </h3>
+  <div
+    class="mx-auto flex max-w-[740px] flex-wrap justify-center gap-2"
+    id="fighters"
+  >
+    {
+      fighters.map((fighter, index) => (
+        <div
+          class={`animate-fade-up animate-once animate-duration-500 animate-ease-in h-30 w-25 overflow-hidden rounded-sm bg-gray-400/50 animate-delay-[${index * 100}ms]`}
+        >
+          <img
+            id={`fighter-${fighter.id}`}
+            src={`${fighter.photo}`}
+            alt={fighter.name}
+            data-name={fighter.name}
+            data-corner={fighter.corner}
+            data-opponent={fighter.opponent_id}
+            class="inline-block h-full w-full rounded-sm border-2 border-yellow-800 object-cover"
+            draggable="false"
+          />
+        </div>
+      ))
+    }
+  </div>
+
+  <button
+    class="fixed top-5 right-0 z-50 h-10 w-10 rounded-full border-2 border-gray-200 p-2 text-2xl text-white hover:scale-105 hover:cursor-pointer hover:bg-gray-800 sm:right-4"
+    id="toggleSoundButton"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <path
+        fill="currentColor"
+        fill-rule="evenodd"
+        d="m89.752 59.582 251.583 251.584 5.433 5.432 49.473 49.473v-.001l30.861 30.861h-.001l25.318 25.318-30.17 30.17-187.833-187.834.001 164.103-110.73-85.458h-81.02V172.563h80.896l10.537-8.293-74.518-74.518zm314.213 28.015c67.74 75.639 82.5 181.38 44.28 270.136l-32.95-32.95c23.87-71.003 8.999-151.972-44.615-210.559zm-84.385 67.509c28.626 31.924 41.556 72.77 38.788 112.752l-49.236-49.236c-4.823-12.914-12.148-25.12-21.976-35.884l-.9-.973zm-85.163-69.772-.001 58.574-32.78-32.78z"
+      ></path>
+    </svg>
+  </button>
+</div>
+<script is:inline>
+  const defaultFighterImage = "./images/character-default.webp";
+
+  const $fighters = document.getElementById("fighters");
+  const $fightersImages = $fighters.querySelectorAll("img");
+
+  const $fighterImg1 = document.getElementById("fighter-img-0");
+  const $fighterInfo1 = document.getElementById("fighter-info-0");
+  const $fighterImg2 = document.getElementById("fighter-img-1");
+  const $fighterInfo2 = document.getElementById("fighter-info-1");
+
+  const $toggleSoundButton = document.getElementById("toggleSoundButton");
+  // const sonido = new Audio("/sounds/mixkit-arcade-player-select-2036.wav");
+  const sonido = new Audio("/sounds/retro-coin-4-236671.mp3");
+  const boxingBellAudio = new Audio("/sounds/boxing-bell-signals.mp3");
+
+  let soundEnabled = false;
+  $toggleSoundButton.addEventListener("click", () => {
+    soundEnabled = !soundEnabled;
+    if (soundEnabled) {
+      boxingBellAudio.currentTime = 0;
+      boxingBellAudio.play();
+
+      $toggleSoundButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path fill="currentColor" fill-rule="evenodd" d="m403.966 426.944-33.285-26.63c74.193-81.075 74.193-205.015-.001-286.09l33.285-26.628c86.612 96.712 86.61 242.635.001 339.348M319.58 155.105l-33.324 26.659c39.795 42.568 39.794 108.444.001 151.012l33.324 26.658c52.205-58.22 52.205-146.109-.001-204.329m-85.163-69.772-110.854 87.23H42.667v170.666h81.02l110.73 85.458z"/>
+        </svg>`;
+    } else {
+      boxingBellAudio.pause();
+      $toggleSoundButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="m89.752 59.582 251.583 251.584 5.433 5.432 49.473 49.473v-.001l30.861 30.861h-.001l25.318 25.318-30.17 30.17-187.833-187.834.001 164.103-110.73-85.458h-81.02V172.563h80.896l10.537-8.293-74.518-74.518zm314.213 28.015c67.74 75.639 82.5 181.38 44.28 270.136l-32.95-32.95c23.87-71.003 8.999-151.972-44.615-210.559zm-84.385 67.509c28.626 31.924 41.556 72.77 38.788 112.752l-49.236-49.236c-4.823-12.914-12.148-25.12-21.976-35.884l-.9-.973zm-85.163-69.772-.001 58.574-32.78-32.78z"
+          ></path>
+        </svg>`;
+    }
+  });
+
+  $fightersImages.forEach(($img) => {
+    $img.addEventListener("mouseenter", () => {
+      if (soundEnabled) {
+        sonido.pause();
+        sonido.currentTime = 0;
+        sonido.play();
+      }
+
+      $fightersImages.forEach(($img) => {
+        $img.style.filter = "grayscale(100%)";
+        $img.style.scale = "1";
+        $img.parentNode.style.border = "1";
+      });
+      $img.style.filter = "none";
+      $img.parentNode.style.scale = "1.08";
+
+      const $opponent = document.getElementById(
+        `fighter-${$img.dataset.opponent}`
+      );
+      $opponent.style.filter = "none";
+      $opponent.parentNode.style.scale = "1.08";
+
+      if ($img.dataset.corner == 0) {
+        $fighterImg1.setAttribute("src", $img.getAttribute("src"));
+        $fighterImg2.setAttribute("src", $opponent.getAttribute("src"));
+        $fighterInfo1.innerText = $img.dataset.name;
+        $fighterInfo2.innerText = $opponent.dataset.name;
+      } else {
+        $fighterImg2.setAttribute("src", $img.getAttribute("src"));
+        $fighterImg1.setAttribute("src", $opponent.getAttribute("src"));
+        $fighterInfo1.innerText = $opponent.dataset.name;
+        $fighterInfo2.innerText = $img.dataset.name;
+      }
+
+      $fighterImg1.classList.add("animate-rotate-y");
+      $fighterImg2.classList.add("animate-rotate-y");
+
+      $fighterInfo1.classList.remove("hidden");
+      $fighterInfo2.classList.remove("hidden");
+
+      // Eliminar la animación después de que termine
+      setTimeout(() => {
+        $fighterImg1.classList.remove("animate-rotate-y");
+        $fighterImg2.classList.remove("animate-rotate-y");
+      }, 600); // 600ms para coincidir con la duración de la animación
+    });
+
+    $img.addEventListener("mouseleave", () => {
+      $fightersImages.forEach(($img) => {
+        $img.style.filter = "none";
+        $img.style.scale = "1";
+        $img.parentNode.style.scale = "1";
+      });
+
+      $fighterImg1.setAttribute("src", defaultFighterImage);
+      $fighterInfo1.classList.add("hidden");
+      $fighterImg2.setAttribute("src", defaultFighterImage);
+      $fighterInfo2.classList.add("hidden");
+    });
+  });
+</script>
