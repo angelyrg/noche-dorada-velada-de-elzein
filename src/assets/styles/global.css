@@ -1,2 +1,44 @@
 @import "tailwindcss";
 @import "tailwindcss-animated";
+
+@font-face {
+    font-family: 'Royal Fighter';
+    src: url('/fonts/Royal Fighter Demo.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@theme {
+    --font-royal-fighter: "Royal Fighter", "sans-serif";
+}
+
+.fighter_character {
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(10% 0, 100% 0%, 90% 100%, 0% 100%);
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.1), transparent);
+
+}
+
+.fighter_character.active {
+    border: 4px solid #EFAB1C;
+    animation: fighter_animation 1s infinite ease-in-out;
+}
+
+@keyframes fighter_animation {
+    0% {
+        border: 4px solid #EFAB1C;
+    }
+
+    50% {
+        border: 4px solid #f54e00;
+    }
+
+    100% {
+        border: 4px solid #EFAB1C;
+    }
+}
