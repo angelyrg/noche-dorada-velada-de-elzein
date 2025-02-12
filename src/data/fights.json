@@ -3,6 +3,7 @@
     "id": 1,
     "name": "Cristorata",
     "photo": "./images/fighters/cristorata.webp",
+    "avatar": "./images/fighters/cristorata_avatar.webp",
     "corner": 0,
     "fight_id": 1,
     "opponent_id": 2
@@ -11,6 +12,7 @@
     "id": 2,
     "name": "Cañita",
     "photo": "./images/fighters/canita.webp",
+    "avatar": "./images/fighters/canita_avatar.webp",
     "corner": 1,
     "fight_id": 1,
     "opponent_id": 1
@@ -19,6 +21,7 @@
     "id": 3,
     "name": "Glogloking",
     "photo": "./images/fighters/glogloking.webp",
+    "avatar": "./images/fighters/glogloking_avatar.webp",
     "corner": 0,
     "fight_id": 2,
     "opponent_id": 4
@@ -27,6 +30,7 @@
     "id": 4,
     "name": "Shadoune",
     "photo": "./images/fighters/shadoune.webp",
+    "avatar": "./images/fighters/shadoune_avatar.webp",
     "corner": 1,
     "fight_id": 2,
     "opponent_id": 3
@@ -35,6 +39,7 @@
     "id": 5,
     "name": "Fanodric",
     "photo": "./images/fighters/fanodric.webp",
+    "avatar": "./images/fighters/fanodric_avatar.webp",
     "corner": 0,
     "fight_id": 3,
     "opponent_id": 6
@@ -43,6 +48,7 @@
     "id": 6,
     "name": "Dafonseka",
     "photo": "./images/fighters/dafonseka.webp",
+    "avatar": "./images/fighters/dafonseka_avatar.webp",
     "corner": 1,
     "fight_id": 3,
     "opponent_id": 5
@@ -51,6 +57,7 @@
     "id": 7,
     "name": "Smash",
     "photo": "./images/fighters/smash.webp",
+    "avatar": "./images/fighters/smash_avatar.webp",
     "corner": 0,
     "fight_id": 4,
     "opponent_id": 8
@@ -59,6 +66,7 @@
     "id": 8,
     "name": "Kingteka",
     "photo": "./images/fighters/kingteka.webp",
+    "avatar": "./images/fighters/kingteka_avatar.webp",
     "corner": 1,
     "fight_id": 4,
     "opponent_id": 7
@@ -67,6 +75,7 @@
     "id": 9,
     "name": "Zullyy",
     "photo": "./images/fighters/zullyy.webp",
+    "avatar": "./images/fighters/zullyy_avatar.webp",
     "corner": 0,
     "fight_id": 5,
     "opponent_id": 10
@@ -75,6 +84,7 @@
     "id": 10,
     "name": "La Pinky",
     "photo": "./images/fighters/la pinky.webp",
+    "avatar": "./images/fighters/la pinky.webp",
     "corner": 1,
     "fight_id": 5,
     "opponent_id": 9
