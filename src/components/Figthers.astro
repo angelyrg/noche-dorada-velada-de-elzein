@@ -5,7 +5,9 @@ fighters.sort(() => 0.5 - Math.random());
 import vsLogo from "@/assets/images/vs.webp";
 ---
 
-<div class="mx-auto max-w-6xl p-8 px-2 pt-4 text-white md:pt-8 lg:px-10">
+<div
+  class="mx-auto max-w-6xl overflow-x-hidden p-8 px-2 pt-4 text-white md:pt-8 lg:px-10"
+>
   <div class="">
     <div
       class="mx-auto flex max-w-[600px] flex-row items-center justify-between"
@@ -24,7 +26,7 @@ import vsLogo from "@/assets/images/vs.webp";
         </div>
         <div
           id="fighter-info-0"
-          class="font-royal-fighter absolute top-[90%] left-1/2 hidden w-max -translate-x-1/2 transform bg-black/80 px-3 text-2xl font-semibold text-yellow-600 uppercase italic sm:top-[80%] sm:right-[80%] sm:left-0"
+          class="font-royal-fighter absolute top-[90%] left-1/2 hidden w-max -translate-x-1/2 transform bg-black/80 px-3 text-xl font-semibold text-yellow-600 uppercase italic sm:top-[80%] sm:right-[100%] sm:left-0 sm:text-2xl"
         >
         </div>
       </div>
@@ -33,11 +35,11 @@ import vsLogo from "@/assets/images/vs.webp";
           class="font-royal-fighter animate-fade-up animate-once animate-duration-500 animate-ease-in animate-delay-200 md:px-auto px-2 text-4xl italic md:text-6xl"
           >VS</span
         > -->
-        <Image
-          src={vsLogo}
-          alt="VS"
-          class="animate-fade-up animate-once animate-duration-500 animate-ease-in animate-delay-200 md:px-auto vs_icon"
-        />
+        <div
+          class="vs_icon animate-fade-up animate-once animate-duration-500 animate-ease-in animate-delay-200 relative"
+        >
+          <Image src={vsLogo} alt="VS" class="md:px-auto w-50 sm:w-70" />
+        </div>
       </div>
       <div class="relative">
         <div
@@ -53,7 +55,7 @@ import vsLogo from "@/assets/images/vs.webp";
         </div>
         <div
           id="fighter-info-1"
-          class="font-royal-fighter absolute top-[90%] left-1/2 hidden w-max -translate-x-1/2 transform bg-black/80 px-3 text-2xl font-semibold text-yellow-600 uppercase italic sm:top-[80%] sm:left-[80%]"
+          class="font-royal-fighter absolute top-[90%] left-1/2 hidden w-max -translate-x-1/2 transform bg-black/80 px-3 text-xl font-semibold text-yellow-600 uppercase italic sm:top-[80%] sm:left-[100%] sm:text-2xl"
         >
         </div>
       </div>
@@ -76,11 +78,12 @@ import vsLogo from "@/assets/images/vs.webp";
         >
           <img
             id={`fighter-${fighter.id}`}
-            src={`${fighter.photo}`}
+            src={`${fighter.avatar}`}
             alt={fighter.name}
             data-name={fighter.name}
             data-corner={fighter.corner}
             data-opponent={fighter.opponent_id}
+            data-photo={fighter.photo}
             class="fighter_character inline-block object-cover [mask-image:linear-gradient(#000_50%,transparent_100%)]"
             draggable="false"
           />
@@ -165,13 +168,13 @@ import vsLogo from "@/assets/images/vs.webp";
       $opponent.parentNode.style.scale = "1.08";
 
       if ($img.dataset.corner == 0) {
-        $fighterImg1.setAttribute("src", $img.getAttribute("src"));
-        $fighterImg2.setAttribute("src", $opponent.getAttribute("src"));
+        $fighterImg1.setAttribute("src", $img.dataset.photo);
+        $fighterImg2.setAttribute("src", $opponent.dataset.photo);
         $fighterInfo1.innerText = $img.dataset.name;
         $fighterInfo2.innerText = $opponent.dataset.name;
       } else {
-        $fighterImg2.setAttribute("src", $img.getAttribute("src"));
-        $fighterImg1.setAttribute("src", $opponent.getAttribute("src"));
+        $fighterImg2.setAttribute("src", $img.dataset.photo);
+        $fighterImg1.setAttribute("src", $opponent.dataset.photo);
         $fighterInfo1.innerText = $opponent.dataset.name;
         $fighterInfo2.innerText = $img.dataset.name;
       }
